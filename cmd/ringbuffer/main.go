@@ -12,7 +12,6 @@ import (
 	"github.com/cilium/ebpf/link"
 	"github.com/cilium/ebpf/ringbuf"
 	"github.com/cilium/ebpf/rlimit"
-	"golang.org/x/sys/unix"
 )
 
 // $BPF_CLANG and $BPF_CFLAGS are set by the Makefile.
@@ -86,6 +85,13 @@ func main() {
 			continue
 		}
 
-		log.Printf("pid: %d\tcomm: %s\n", event.Pid, unix.ByteSliceToString(event.Comm[:]))
+		log.Printf("pid: %d\t hello comm: %s\n", event.Pid, byteSliceToString(event.Comm[:]))
 	}
+}
+
+func byteSliceToString(s []byte) string {
+	if i := bytes.IndexByte(s, 0); i != -1 {
+		s = s[:i]
+	}
+	return string(s)
 }

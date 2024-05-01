@@ -85,7 +85,7 @@ func main() {
 			continue
 		}
 
-		log.Printf("pid: %d\t hello comm: %s\n", event.Pid, byteSliceToString(event.Comm[:]))
+		log.Printf("pid: %d\t hello hello comm: %s\n", event.Pid, byteSliceToString(event.Comm[:]))
 	}
 }
 
